@@ -4,3 +4,10 @@ main: io.github.mcengine.spigotmc.backpack.engine.MCEngineBackPackSpigotMC
 author: MCEngine
 description: MCEngine BackPack
 api-version: 1.13
+
+commands:
+  backpack:
+    description: Main command for managing backpacks
+    usage: /<command> default give <player> <hdb-id> <rows(1-6)>
+    permission: mcengine.backpack.give
+    permission-message: You do not have permission to use this command.
