@@ -2,6 +2,7 @@ package io.github.mcengine.papermc.backpack.engine;
 
 import io.github.mcengine.api.core.MCEngineCoreApi;
 import io.github.mcengine.api.core.Metrics;
+import io.github.mcengine.common.backpack.listener.MCEngineBackPackListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,6 +11,9 @@ import java.util.Date;
 
 /**
  * Main PaperMC plugin class for MCEngineBackPack.
+ *
+ * <p>This entry point initializes config and loads extensions. It also registers
+ * the backpack listener which wires player interactions to the backpack API.</p>
  */
 public class MCEngineBackPackPaperMC extends JavaPlugin {
 
@@ -34,6 +38,9 @@ public class MCEngineBackPackPaperMC extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
+        // Register backpack listener (non-invasive addition)
+        getServer().getPluginManager().registerEvents(new MCEngineBackPackListener(this), this);
 
         // Load extensions
         MCEngineCoreApi.loadExtensions(
