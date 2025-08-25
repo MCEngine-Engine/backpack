@@ -2,8 +2,13 @@ package io.github.mcengine.papermc.backpack.engine;
 
 import io.github.mcengine.api.core.MCEngineCoreApi;
 import io.github.mcengine.api.core.Metrics;
+import io.github.mcengine.common.backpack.MCEngineBackPackCommon;
+import io.github.mcengine.common.backpack.command.BackPackCommand;
 import io.github.mcengine.common.backpack.listener.MCEngineBackPackListener;
+import io.github.mcengine.common.backpack.tabcompleter.BackPackTabCompleter;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -41,6 +46,22 @@ public class MCEngineBackPackPaperMC extends JavaPlugin {
 
         // Register backpack listener (non-invasive addition)
         getServer().getPluginManager().registerEvents(new MCEngineBackPackListener(this), this);
+
+        // --- Register /backpack command using dispatcher pattern (main:sub -> default) ---
+        MCEngineBackPackCommon api = new MCEngineBackPackCommon(this);
+        String namespace = "backpack";
+        api.registerNamespace(namespace);
+        api.registerSubCommand(namespace, "default", new BackPackCommand(this));
+        api.registerSubTabCompleter(namespace, "default", new BackPackTabCompleter());
+
+        CommandExecutor dispatcher = api.getDispatcher(namespace);
+        if (getCommand("backpack") != null) {
+            getCommand("backpack").setExecutor(dispatcher);
+            getCommand("backpack").setTabCompleter((TabCompleter) dispatcher);
+        } else {
+            getLogger().severe("Command 'backpack' not found in plugin.yml. Please define it to enable command handling.");
+        }
+        // -------------------------------------------------------------------------------
 
         // Load extensions
         MCEngineCoreApi.loadExtensions(
