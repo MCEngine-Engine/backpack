@@ -1,6 +1,6 @@
 name: MCEngineBackPack
 version: ${version}
-main: io.github.mcengine.spigotmc.backpack.engine.MCEngineBackPackSpigotMC
+main: io.github.mcengine.papermc.backpack.engine.MCEngineBackPackSpigotMC
 author: MCEngine
 description: MCEngine BackPack
 api-version: 1.13
