@@ -5,9 +5,9 @@ plugins {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.21.8-R0.1-SNAPSHOT'
 
-    implementation 'io.github.mcengine:core-api:2025.0.9-3'
-    implementation 'io.github.mcengine:backpack-api:2025.0.9-3'
-    implementation 'io.github.mcengine:backpack-common:2025.0.9-3'
+    implementation 'io.github.mcengine:core-api:2025.0.9-4'
+    implementation 'io.github.mcengine:backpack-api:2025.0.9-4'
+    implementation 'io.github.mcengine:backpack-common:2025.0.9-4'
 }
 
 processResources {
