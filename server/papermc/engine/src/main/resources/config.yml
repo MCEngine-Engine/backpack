@@ -1,3 +1,4 @@
 enable: false
-
-license: free
+licenses:
+  license: free
+  secret_key:

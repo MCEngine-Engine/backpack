@@ -37,9 +37,11 @@ public class MCEngineBackPackSpigotMC extends JavaPlugin {
             return;
         }
 
-        String licenseKey = getConfig().getString("license", "free");
-        if (!licenseKey.equalsIgnoreCase("free")) {
-            getLogger().warning("License key is not valid ('free' expected). Disabling plugin...");
+        String license = getConfig().getString("licenses.license", "free"); 
+        if (!license.equalsIgnoreCase("free")) { 
+            getLogger().warning("Plugin is disabled in config.yml.");
+            getLogger().warning("Invalid license.");
+            getLogger().warning("Check license or use \"free\".");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
